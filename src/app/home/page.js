@@ -4,10 +4,11 @@ import Image from "next/image";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from '../styles/home.module.css';
 import Chart from 'chart.js/auto';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function Home() {
+  const [ensino, setEnsino] = useState('ensino-medio')
 
   useEffect(() => {
     const ctx = document.getElementById('meuGrafico')
@@ -156,7 +157,41 @@ export default function Home() {
       }
     })
 
+    const ctxAlteravel = document.getElementById('graficoAlteravel')
+
+    new Chart(ctxAlteravel, {
+      type: 'bar',
+      data: {
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Taxa de abandono escolar por ano (ensino médio)',
+          data: [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153],
+          borderWidth: 1,
+          backgroundColor: 'rgb(28, 94, 235)'
+        }]
+      }
+    })
+
   }, [])
+
+  useEffect(() => {
+    const chart = Chart.getChart("graficoAlteravel")
+
+    switch (ensino) {
+      case 'ensino-medio':
+        chart.data.datasets[0].data = [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153]
+        chart.data.datasets[0].backgroundColor = 'rgb(28, 94, 235)'
+        chart.data.datasets[0].label = 'Taxa de abandono escolar por ano (ensino médio)'
+        break;
+      case 'ensino-fundamental':
+        chart.data.datasets[0].data = [0.013333333532015483, 0.013333333532015483, 0.04000000059604645, 0.3199999988079071, 0.18000000069538752, 0.15999999741713206, 0.1666666641831398]
+        chart.data.datasets[0].backgroundColor = 'rgb(235, 39, 28)'
+        chart.data.datasets[0].label = 'Taxa de abandono escolar por ano (ensino fundamental)'
+        break;
+    }
+
+    chart.update()
+  }, [ensino])
 
   return (
     <main className={`container ${styles.main}`}>
@@ -427,6 +462,44 @@ export default function Home() {
         </div>
 
         <h2 className={styles.subtitulo}>Como alterar um gráfico?</h2>
+
+        <div className={`row ${styles.noPadding}`}>
+          <div className={`col-6 ${styles.graph__container}`}>
+            <canvas id="graficoAlteravel"></canvas>
+          </div>
+          <div className={`col-6 ${styles.noPadding}`}>
+            <pre className={styles.code__container}>
+              <code className={styles.code}>
+                <span className={styles.code__break}>const [ensino, setEnsino] = useState('ensino-medio')</span><br/>
+                <span className={styles.code__break}>useEffect(() =&gt; &#123;</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>const chart = Chart.getChart("graficoAlteravel")</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}></span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>switch (ensino) &#123;</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>case 'ensino-medio':</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].data = [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153]</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].backgroundColor = 'rgb(28, 94, 235)'</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].label = 'Taxa de abandono escolar por ano (ensino médio)'</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>break;</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>case 'ensino-fundamental':</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].data = [0.013333333532015483, 0.013333333532015483, 0.04000000059604645, 0.3199999988079071, 0.18000000069538752, 0.15999999741713206, 0.1666666641831398]</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].backgroundColor = 'rgb(235, 39, 28)'</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>chart.data.datasets[0].label = 'Taxa de abandono escolar por ano (ensino fundamental)'</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>break;</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>&#125;</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}></span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>chart.update()</span>
+                <span className={styles.code__break}>&#125;, [ensino])</span>
+              </code>
+            </pre>
+          </div>
+        </div>
+
+        <div className="d-flex">
+          <button style={{ marginRight: 8 }} type="button" className="btn btn-primary" onClick={() => setEnsino('ensino-medio')}>Ensino médio</button>
+          <button type="button" className="btn btn-danger" onClick={() => setEnsino('ensino-fundamental')}>Ensino fundamental</button>
+        </div>
+
+
       </div>
     </main>
   );
