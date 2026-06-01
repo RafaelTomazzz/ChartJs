@@ -131,7 +131,7 @@ export default function Home() {
         cutout: "70%"
       }
     })
-    
+
     const ctxPizza = document.getElementById('graficoPizza')
 
     new Chart(ctxPizza, {
@@ -145,10 +145,10 @@ export default function Home() {
           rotation: 270,
           backgroundColor: (context) => {
             const value = context.raw
-            
-            if(value > 1){
+
+            if (value > 1) {
               return 'rgb(235, 39, 28)'
-            } else{
+            } else {
               return 'rgb(28, 94, 235)'
             }
           }
@@ -400,24 +400,33 @@ export default function Home() {
           <div className={`col-6 ${styles.noPadding}`}>
             <pre className={styles.code__container}>
               <code className={styles.code}>
-                <span className={styles.code__break}>new Chart(ctxRosca, &#123;</span>
-                <span style={{ paddingLeft: 32 }} className={styles.code__break}>type: 'doughnut',</span>
+                <span className={styles.code__break}>new Chart(ctxPizza, &#123;</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>type: 'pie',</span>
                 <span style={{ paddingLeft: 32 }} className={styles.code__break}>data: &#123;</span>
                 <span style={{ paddingLeft: 48 }} className={styles.code__break}>labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],</span>
                 <span style={{ paddingLeft: 48 }} className={styles.code__break}>datasets: [&#123;</span>
                 <span style={{ paddingLeft: 64 }} className={styles.code__break}>label: 'Taxa de abandono escolar por ano (ensino médio)',</span>
                 <span style={{ paddingLeft: 64 }} className={styles.code__break}>data: [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153],</span>
-                <span style={{ paddingLeft: 64 }} className={styles.code__break}>spacing: 10,</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>circumference: 180,</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>rotation: 270,</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>backgroundColor: (context) =&gt; &#123;</span>
+                <span style={{ paddingLeft: 80 }} className={styles.code__break}>const value = context.raw</span>
+                <span style={{ paddingLeft: 80 }} className={styles.code__break}></span>
+                <span style={{ paddingLeft: 80 }} className={styles.code__break}>if (value &gt; 1) &#123;</span>
+                <span style={{ paddingLeft: 96 }} className={styles.code__break}>return 'rgb(235, 39, 28)'</span>
+                <span style={{ paddingLeft: 80 }} className={styles.code__break}>&#125; else &#123;</span>
+                <span style={{ paddingLeft: 96 }} className={styles.code__break}>return 'rgb(28, 94, 235)'</span>
+                <span style={{ paddingLeft: 80 }} className={styles.code__break}>&#125;</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>&#125;</span>
                 <span style={{ paddingLeft: 48 }} className={styles.code__break}>&#125;]</span>
-                <span style={{ paddingLeft: 32 }} className={styles.code__break}>&#125;,</span>
-                <span style={{ paddingLeft: 32 }} className={styles.code__break}>options: &#123;</span>
-                <span style={{ paddingLeft: 48 }} className={styles.code__break}>cutout: "70%"</span>
                 <span style={{ paddingLeft: 32 }} className={styles.code__break}>&#125;</span>
                 <span className={styles.code__break}>&#125;)</span>
               </code>
             </pre>
           </div>
         </div>
+
+        <h2 className={styles.subtitulo}>Como alterar um gráfico?</h2>
       </div>
     </main>
   );
