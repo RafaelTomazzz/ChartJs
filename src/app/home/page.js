@@ -131,6 +131,30 @@ export default function Home() {
         cutout: "70%"
       }
     })
+    
+    const ctxPizza = document.getElementById('graficoPizza')
+
+    new Chart(ctxPizza, {
+      type: 'pie',
+      data: {
+        labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+        datasets: [{
+          label: 'Taxa de abandono escolar por ano (ensino médio)',
+          data: [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153],
+          circumference: 180,
+          rotation: 270,
+          backgroundColor: (context) => {
+            const value = context.raw
+            
+            if(value > 1){
+              return 'rgb(235, 39, 28)'
+            } else{
+              return 'rgb(28, 94, 235)'
+            }
+          }
+        }]
+      }
+    })
 
   }, [])
 
@@ -369,6 +393,29 @@ export default function Home() {
           </div>
           <div style={{ maxHeight: '400px' }} className={`col-6 ${styles.graph__container}`}>
             <canvas id="graficoRosca"></canvas>
+          </div>
+          <div style={{ maxHeight: '400px' }} className={`col-6 ${styles.graph__container}`}>
+            <canvas id="graficoPizza"></canvas>
+          </div>
+          <div className={`col-6 ${styles.noPadding}`}>
+            <pre className={styles.code__container}>
+              <code className={styles.code}>
+                <span className={styles.code__break}>new Chart(ctxRosca, &#123;</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>type: 'doughnut',</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>data: &#123;</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024'],</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>datasets: [&#123;</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>label: 'Taxa de abandono escolar por ano (ensino médio)',</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>data: [0.7133333325386048, 0.06666666766007741, 0.1600000023841858, 1.4266666730244955, 1.346666653951009, 1.9200000445048013, 1.046666685740153],</span>
+                <span style={{ paddingLeft: 64 }} className={styles.code__break}>spacing: 10,</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>&#125;]</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>&#125;,</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>options: &#123;</span>
+                <span style={{ paddingLeft: 48 }} className={styles.code__break}>cutout: "70%"</span>
+                <span style={{ paddingLeft: 32 }} className={styles.code__break}>&#125;</span>
+                <span className={styles.code__break}>&#125;)</span>
+              </code>
+            </pre>
           </div>
         </div>
       </div>
